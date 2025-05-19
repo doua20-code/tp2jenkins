@@ -2,17 +2,33 @@ pipeline {
     agent any 
     tools  {
         maven 'maven' 
+    }
+    stages  {
+        stage ("clean up"){
+            steps  {
+                deleteDir()
+            }
+        }
+       stage ("clone repo"){
+            steps {
+                sh  "git clone https://github.com/doua20-code/exp1.spring.git"
+            }
+       }
+      stage ("generate backend image") {
+           steps {
+               dir ("exp1.spring"){
+                    sh "mvn clean install"
+                    sh "docker bluid -t docexp1.spring ."
+               }
+           }
+     }
+     stage ("run docker compose") {
+        steps { 
+             dir ("exp1.spring"){
+                 sh " docker compose up -d"
+             }
+        }
+     }
+   }
 }
-stages  {
-stage ("clean up"){
-steps  {
-deleteDir()
-}
-}
-stages ("clone repo"){
-steps {
-sh  "git clone https://github.com/doua20-code/exp1.spring.git"
-}
-}
-stage ("generate backend image") {
-steps 
+
