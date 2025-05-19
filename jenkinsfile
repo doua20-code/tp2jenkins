@@ -1,0 +1,18 @@
+pipeline {
+    agent any 
+    tools  {
+        maven 'maven' 
+}
+stages  {
+stage ("clean up"){
+steps  {
+deleteDir()
+}
+}
+stages ("clone repo"){
+steps {
+sh  "git clone https://github.com/doua20-code/exp1.spring.git"
+}
+}
+stage ("generate backend image") {
+steps 
