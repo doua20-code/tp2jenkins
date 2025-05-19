@@ -2,6 +2,6 @@ services:
 
 #spring boot application
 spring-boot-app:
-  image: docexp1.spring 
+  image: doctp2jenkins
   ports:
    - "0.0.0.0:8084:8080"
